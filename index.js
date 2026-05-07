@@ -37,13 +37,15 @@ app.get('/api/persons',(request, response)=> {
     response.json(persons)
 })
 
-app.get('/info',(request, response)=> {
-    const count = persons.length
-    const time = new Date()
-    response.send(`
-        <p>Phonebook has info for ${count} people</p>
-        <p>${time}</p>
-        `)
+app.get('/api/persons/:id',(request, response)=> {
+    const id = request.params.id
+    const person = persons.find(p => p.id === id)
+
+    if (person) {
+        response.json(person)
+      } else {
+        response.status(404).json({ error: 'Person not found' })
+      }
 })
   
 
