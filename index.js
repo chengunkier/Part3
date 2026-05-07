@@ -47,7 +47,7 @@ app.post('/api/persons', (request, response) => {
     }
 
     const nameExists = persons.find(
-        person => person.name === body.name
+        person => person.name.toLowerCase() === body.name.toLowerCase()
     )
 
     if (nameExists) {
@@ -57,7 +57,12 @@ app.post('/api/persons', (request, response) => {
     }
 
     const generateId = () => {
-        return Math.floor(Math.random() * 1000000).toString()
+        if (persons.length === 0) {
+            return 1
+        }
+
+        const maxId = Math.max(...persons.map(person => person.id))
+        return maxId + 1
     }
 
     const person = {
@@ -66,10 +71,9 @@ app.post('/api/persons', (request, response) => {
         number: body.number
     }
 
-    persons.push(person)
-    response.json(person)
-})    
-
+     persons.push(person)
+     response.json(persons)
+ })
   
 const PORT = 3000
 app.listen(PORT)
