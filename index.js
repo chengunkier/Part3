@@ -37,16 +37,16 @@ app.get('/api/persons',(request, response)=> {
     response.json(persons)
 })
 
-app.get('/api/persons/:id',(request, response)=> {
+app.delete('/api/persons/:id',(request, response)=> {
     const id = request.params.id
     const person = persons.find(p => p.id === id)
+    
+    if(!person) return response.status(404).json({ error: 'Person not found' })
 
-    if (person) {
-        response.json(person)
-      } else {
-        response.status(404).json({ error: 'Person not found' })
-      }
-})
+      persons = persons.filter(p => p.id !== id)
+      response.json(persons)
+})     
+
   
 
 const PORT = 3000
