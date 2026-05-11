@@ -2,7 +2,6 @@ const http = require('http')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const path = require('path')
 
 const app = express()
 
@@ -16,8 +15,6 @@ morgan.token('body', (req, res) => {
 app.use(
     morgan(':method :url :status :res[content-length] - :response-time ms :body')
 )
-
-app.use(express.static(path.join(__dirname, 'dist')))
 
 let persons = [
     {
@@ -121,10 +118,6 @@ app.delete('/api/persons/:id',(request, response)=> {
       persons = persons.filter(p => p.id !== id)
       response.json(persons)
 })     
-
-app.use((req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
-})
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT)
