@@ -124,9 +124,8 @@ app.put('/api/persons/:id', (req, res, next) => {
 app.delete('/api/persons/:id', (req, res, next) => {
 
   Person.findByIdAndDelete(req.params.id)
-    .then(deletedPerson => {
 
-      console.log('Deleted:', deletedPerson)
+    .then(deletedPerson => {
 
       if (!deletedPerson) {
 
@@ -137,6 +136,7 @@ app.delete('/api/persons/:id', (req, res, next) => {
 
       res.status(204).end()
     })
+
     .catch(error => next(error))
 })
 
