@@ -115,9 +115,11 @@ app.put('/api/persons/:id', (req, res, next) => {
       context: 'query'
     }
   )
+
     .then(updatedPerson => {
       res.json(updatedPerson)
     })
+
     .catch(error => next(error))
 })
 
