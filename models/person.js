@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const personSchema = new mongoose.Schema({
+
   name: {
     type: String,
     required: true,
@@ -12,9 +13,11 @@ const personSchema = new mongoose.Schema({
     required: true,
     minlength: 8
   }
+
 })
 
 personSchema.set('toJSON', {
+
   transform: (document, returnedObject) => {
 
     returnedObject.id = returnedObject._id.toString()
