@@ -1,4 +1,3 @@
-const http = require('http')      
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -26,11 +25,11 @@ app.use(express.json())
 app.use(cors())
 
 morgan.token('body', (req) => {
-    return JSON.stringify(req.body)
-  })
+  return JSON.stringify(req.body)
+})
   
 app.use(
-    morgan(':method :url :status :res[content-length] - :response-time ms :body')
+  morgan(':method :url :status :res[content-length] - :response-time ms :body')
 )
 
 app.use(express.static(path.join(__dirname, 'dist')))
@@ -49,12 +48,12 @@ app.get('/api/persons', (req, res) => {
     })
 })
 
-app.get('/info', async (req, res) => {
+app.get('/info', async  (req, res) => {
 
   const count = await Person.countDocuments({})
 
   res.send(`
-    <p>Phonebook has info for ${count} people</p>
+    <p>Phonebook has info for ${count} people</p> 
     <p>${new Date()}</p>
   `)
 })
